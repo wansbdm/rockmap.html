@@ -6,21 +6,131 @@
   <title>中国摇滚地图</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding-top: 30px;
+      min-height: 70px;
+      border-bottom: #e8491d 3px solid;
+    }
+    header a {
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 16px;
+    }
+    header ul {
+      padding: 0;
+      list-style: none;
+    }
+    header li {
+      display: inline;
+      padding: 0 20px 0 20px;
+    }
+    header #branding {
+      float: left;
+    }
+    header #branding h1 {
+      margin: 0;
+    }
+    header nav {
+      float: right;
+      margin-top: 10px;
+    }
+    header .highlight, header .current a {
+      color: #e8491d;
+      font-weight: bold;
+    }
     #map {
-      height: 100vh;
+      height: 500px; /* Adjust the height as needed */
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <div id="map"></div>
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1>中国摇滚音乐</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="current"><a href="#showcase">概览</a></li>
+          <li><a href="#history">历史</a></li>
+          <li><a href="#bands">乐队</a></li>
+          <li><a href="#songs">歌曲推荐</a></li>
+          <li><a href="#map">中国摇滚地图</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <section id="showcase">
+    <div class="container">
+      <h1>探索中国摇滚音乐</h1>
+      <p>从80年代的崔健到现代的多元风格，中国摇滚音乐一直在发展和变化。</p>
+    </div>
+  </section>
+
+  <section id="main">
+    <div class="container">
+      <article id="history">
+        <h1 class="content-title">中国摇滚音乐历史</h1>
+        <p>中国摇滚音乐起源于20世纪80年代，经历了从地下到主流的转变。它不仅仅是一种音乐风格，更是一代人的精神象征。</p>
+        <!-- 这里可以添加更多的历史内容 -->
+      </article>
+    </div>
+  </section>
+
+  <section id="keywords">
+    <div class="container">
+      <h1>代表乐队</h1>
+      <div class="keywords">
+        <!-- 替换成实际的图片URL -->
+        <img src="词云图2.jpg" alt="词云图">
+        <!-- 更多乐队图片 -->
+      </div>
+    </div>
+  </section>
+
+  <section id="songs">
+    <div class="container">
+      <h1>歌曲推荐</h1>
+      <!-- 这里可以添加歌曲推荐列表 -->
+    </div>
+  </section>
+
+  <section id="map">
+    <div id="map"></div>
+  </section>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> 
   <script>
     // 初始化地图
     const map = L.map('map').setView([35.8617, 104.1954], 4);
 
     // 添加瓦片图层
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',  {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
@@ -35,7 +145,7 @@
       { name: "新裤子乐队", location: [39.9042, 116.4074], origin: "北京", description: "以电子摇滚风格著称。" },
       { name: "万能青年旅店", location: [38.0428, 114.5149], origin: "石家庄", description: "代表作有《杀死那个石家庄人》。" },
       { name: "谢天笑", location: [36.8131, 118.0548], origin: "淄博", description: "代表作有《向阳花》。" },
-      { name: "郑钧", location: [34.3416, 108.9398], origin: "西安", description: "代表作有《灰姑娘》。" },
+      { name: "郑钧", location: [34.3416, 108.9398], origin: "西安", description: "代表作有《私奔》。" },
       { name: "伍佰", location: [25.032969, 121.565418], origin: "台湾", description: "台湾著名摇滚歌手，代表作有《挪威的森林》。" },
       { name: "信乐团", location: [25.032969, 121.565418], origin: "台湾", description: "台湾摇滚乐团，代表作有《死了都要爱》。" },
       { name: "零点乐队", location: [39.9042, 116.4074], origin: "北京", description: "代表作有《爱不爱我》。" },
@@ -43,18 +153,21 @@
       { name: "达达乐队", location: [31.2304, 121.4737], origin: "上海", description: "代表作有《南方》。" },
       { name: "逃跑计划", location: [39.9042, 116.4074], origin: "北京", description: "代表作有《夜空中最亮的星》。" },
       { name: "刺猬乐队", location: [39.9042, 116.4074], origin: "北京", description: "代表作有《白日梦蓝》。" },
-      { name: "后海大鲨鱼", location: [39.9042, 116.4074], origin: "北京", description: "代表作有《浪潮》。" },
+      { name: "后海大鲨鱼", location: [39.9042, 116.4074], origin: "北京", description: "代表作有《心要野》。" },
       { name: "木马乐队", location: [31.2304, 121.4737], origin: "上海", description: "代表作有《Yellow Star》。" },
       { name: "苏阳", location: [36.0611, 103.8343], origin: "兰州", description: "融合西北民谣与摇滚的歌手，代表作有《贤良》。" },
       { name: "诱导社", location: [39.9042, 116.4074], origin: "北京", description: "北京朋克代表乐队。" },
       { name: "P.K.14", location: [39.9042, 116.4074], origin: "北京", description: "中国后朋克乐队。" },
       { name: "草东没有派对", location: [25.032969, 121.565418], origin: "台湾", description: "独立摇滚乐队，代表作有《大风吹》。" },
-      { name: "康士坦的变化球", location: [25.032969, 121.565418], origin: "台湾", description: "融合实验与摇滚的乐队，代表作有《你不是真正的快乐》。" },
-      { name: "国足乐队", location: [30.5928, 114.3055], origin: "武汉", description: "风格为独立摇滚，代表作有《新长征路上的摇滚》" },
-      { name: "白纸扇", location: [30.5928, 114.3055], origin: "武汉", description: "融合流行与摇滚元素，代表作有《无题》。" },
+      { name: "康士坦的变化球", location: [25.032969, 121.565418], origin: "台湾", description: "融合实验与摇滚的乐队，代表作有《美好的事情能不能发生在我的身上》。" },
+      { name: "国足乐队", location: [30.5928, 114.3055], origin: "武汉", description: "风格为独立摇滚，代表作有《地球上最后一个EMO男孩》" },
+      { name: "白纸扇", location: [30.5928, 114.3055], origin: "武汉", description: "融合流行与摇滚元素，代表作有《白纸扇》。" },
       { name: "安达组合", location: [40.8174, 111.7652], origin: "内蒙古", description: "成立于2003年，将蒙古民族音乐的原生态演奏与现代元素相结合，曾在世界多个国家巡演。" },
-      { name: "九宝乐队", location: [40.8174, 111.7652], origin: "内蒙古", description: "2011年成立的蒙古族民谣金属乐队，代表作有《三谣》。" },
+      { name: "九宝乐队", location: [40.8174, 111.7652], origin: "内蒙古", description: "2011年成立的蒙古族民谣金属乐队，代表作有《特斯河之赞》。" },
       { name: "HAYA乐团", location: [40.8174, 111.7652], origin: "内蒙古", description: "成立于2006年，由多民族成员组成，融合蒙古族音乐与现代流行元素，代表作有《寂静的天空》。" }
+    ];
+
+          // ... 你的摇滚乐队和歌手数据
     ];
 
     // 将数据按地理位置分组
@@ -77,5 +190,9 @@
         .bindPopup(popupContent);
     });
   </script>
+
+  <footer>
+    <p>版权所有 &copy; 2023 中国摇滚音乐</p>
+  </footer>
 </body>
 </html>
