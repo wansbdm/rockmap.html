@@ -124,13 +124,13 @@
     <div id="map"></div>
   </section>
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> 
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>  
   <script>
     // 初始化地图
     const map = L.map('map').setView([35.8617, 104.1954], 4);
 
     // 添加瓦片图层
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',  {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
@@ -167,9 +167,6 @@
       { name: "HAYA乐团", location: [40.8174, 111.7652], origin: "内蒙古", description: "成立于2006年，由多民族成员组成，融合蒙古族音乐与现代流行元素，代表作有《寂静的天空》。" }
     ];
 
-          // ... 你的摇滚乐队和歌手数据
-    ];
-
     // 将数据按地理位置分组
     const groupedData = rockData.reduce((acc, item) => {
       const key = item.location.join(',');
@@ -190,7 +187,7 @@
         .bindPopup(popupContent);
     });
   </script>
-
+  
   <footer>
     <p>版权所有 &copy; 2023 中国摇滚音乐</p>
   </footer>
